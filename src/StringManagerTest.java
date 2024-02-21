@@ -14,4 +14,14 @@ class StringManagerTest {
         assertEquals(1, result.size());
         assertEquals(input.toLowerCase(), result.get(0));
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"nomeComposto", "NomeComposto"})
+    void converteUmaStringCompostaSendoCaseInsensitiveParaUmaListaDeTamanho2ContendoPalavrasMinusculas(String input) {
+        List<String> result = StringManager.converterCamelCase(input);
+        assertNotNull(result);
+        assertEquals(2, result.size());
+        assertEquals("nome", result.get(0));
+        assertEquals("composto", result.get(1));
+    }
 }
