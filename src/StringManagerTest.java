@@ -32,4 +32,15 @@ class StringManagerTest {
         assertNotNull(result);
         assertTrue(result.contains("CPF"));
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"recupera10Primeiros"})
+    void converteUmaStringComNumerosParaUmaListaDeTamanho3(String input) {
+        List<String> result = StringManager.converterCamelCase(input);
+        assertNotNull(result);
+        assertEquals(3, result.size());
+        assertEquals("recupera", result.get(0));
+        assertEquals("10", result.get(1));
+        assertEquals("primeiros", result.get(2));
+    }
 }

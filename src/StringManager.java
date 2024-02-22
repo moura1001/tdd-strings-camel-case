@@ -23,10 +23,28 @@ public class StringManager {
         boolean isFinalCharacter = i+1 >= original.length();
         char previous = i > 0 ? original.charAt(i-1) : current;
         char next = !isFinalCharacter ? original.charAt(i+1) : current;
-        if(isFirstCharacter && Character.isLowerCase(next)) {
+        if(Character.isAlphabetic(current))
+            return StringManager.tratarLetra(isFirstCharacter, isFinalCharacter, previous, current, next, element, result);
+        else
+            return StringManager.tratarNumero(isFinalCharacter, previous, current, next, element, result);
+    }
+
+    private static String tratarNumero(boolean isFinalCharacter, char previous, char current, char next, String element, List<String> result) {
+        if(!isFinalCharacter && Character.isLowerCase(previous)){
+            result.add(element);
+            return "" + current;
+        }
+        return element + current;
+    }
+
+    private static String tratarLetra(boolean isFirstCharacter, boolean isFinalCharacter, char previous, char current, char next, String element, List<String> result) {
+        if(isFirstCharacter && Character.isLowerCase(next))
             return "" + Character.toLowerCase(current);
-        } else if(!isFirstCharacter && Character.isUpperCase(current) && !isFinalCharacter){
+        else if(!isFirstCharacter && Character.isUpperCase(current) && !isFinalCharacter && !Character.isDigit(previous))
             return StringManager.adicionarNovaPalavraNaListaSeNecessario2(previous, current, next, element, result);
+        else if(!isFinalCharacter && Character.isDigit(previous)){
+            result.add(element);
+            return "" + Character.toLowerCase(current);
         }
         return element + current;
     }
