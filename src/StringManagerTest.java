@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -42,5 +43,13 @@ class StringManagerTest {
         assertEquals("recupera", result.get(0));
         assertEquals("10", result.get(1));
         assertEquals("primeiros", result.get(2));
+    }
+
+    @Test()
+    void deveLancarExcecaoParaStringsQueComecamComNumeros() {
+        StringManagerException thrown = assertThrows(StringManagerException.class, () -> {
+            List<String> result = StringManager.converterCamelCase("10Primeiros");
+        });
+        assertEquals("Inválido → não deve começar com números", thrown.getMessage());
     }
 }

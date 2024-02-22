@@ -12,10 +12,17 @@ public class StringManager {
         String element = "";
         for (int i = 0; i < original.length(); i++) {
             char c = original.charAt(i);
+            StringManager.validarCaractere(i, c);
             element = StringManager.adicionarNovaPalavraNaListaSeNecessario(original, i, c, element, result);
         }
         if(result.isEmpty() || !element.isEmpty())
             result.add(element);
+    }
+
+    private static void validarCaractere(int i, char c) throws StringManagerException {
+        boolean isFirstCharacter = i == 0;
+        if(isFirstCharacter && Character.isDigit(c))
+            throw new StringManagerException("Inválido → não deve começar com números");
     }
 
     private static String adicionarNovaPalavraNaListaSeNecessario(String original, int i, char current, String element, List<String> result) {
