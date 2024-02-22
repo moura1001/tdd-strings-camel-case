@@ -52,4 +52,12 @@ class StringManagerTest {
         });
         assertEquals("Inválido → não deve começar com números", thrown.getMessage());
     }
+
+    @Test()
+    void deveLancarExcecaoParaStringsQueContemCaracteresEspeciaisNaoPermitidos() {
+        StringManagerException thrown = assertThrows(StringManagerException.class, () -> {
+            List<String> result = StringManager.converterCamelCase("nome#Composto");
+        });
+        assertEquals("Inválido → caracteres especiais não são permitidos, somente letras e números", thrown.getMessage());
+    }
 }

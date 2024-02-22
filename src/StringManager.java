@@ -23,6 +23,8 @@ public class StringManager {
         boolean isFirstCharacter = i == 0;
         if(isFirstCharacter && Character.isDigit(c))
             throw new StringManagerException("Inválido → não deve começar com números");
+        else if(!Character.isAlphabetic(c) && !Character.isDigit(c))
+            throw new StringManagerException("Inválido → caracteres especiais não são permitidos, somente letras e números");
     }
 
     private static String adicionarNovaPalavraNaListaSeNecessario(String original, int i, char current, String element, List<String> result) {
