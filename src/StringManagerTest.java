@@ -24,4 +24,12 @@ class StringManagerTest {
         assertEquals("nome", result.get(0));
         assertEquals("composto", result.get(1));
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"CPF", "numeroCPF", "numeroCPFContribuinte"})
+    void trataPalavrasMaiusculasNumaStringComoElementosDistintosQueDevemEstaNaLista(String input) {
+        List<String> result = StringManager.converterCamelCase(input);
+        assertNotNull(result);
+        assertTrue(result.contains("CPF"));
+    }
 }
